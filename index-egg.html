@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Tilak | INDIE-ORIGINALS</title>
+		<meta name="description" content="An Brief Profile of TilakT" />
+		<meta name="keywords" content="Profile, webgl, 3d, objects, Concept, Blocking, shatter, fragment, animation, 3D Modelling, Texturing, Texture, Painting, Rendering, 3D Artist, Engineer, Civil, Architect, Designer, Design Engineer,Thilakar, Thanjavur, TamilNadu, India, Visualaiser, javascript" />
+		<meta name="author" content="TilakT" />
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" href="https://use.typekit.net/tsb3xby.css">
+		<link rel="stylesheet" type="text/css" href="css/base.css" />
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-X5ZRSNWVNG"></script>
+		<script>
+  		window.dataLayer = window.dataLayer || [];
+  		function gtag(){dataLayer.push(arguments);}
+  		gtag('js', new Date());
+
+  		gtag('config', 'G-X5ZRSNWVNG');
+		</script>
+		<script>document.documentElement.className="js";var supportsCssVars=function(){var e,t=document.createElement("style");return t.innerHTML="root: { --tmp-var: bold; }",document.head.appendChild(t),e=!!(window.CSS&&window.CSS.supports&&window.CSS.supports("font-weight","var(--tmp-var)")),t.parentNode.removeChild(t),e};supportsCssVars()||alert("Please view this design in a modern browser that supports CSS Variables.");</script>
+	</head>
+	<body class="design-egg loading">
+		<main><div id="container"></div>
+			<div class="frame">
+				<div class="frame__deco">Move your mouse around.</div>
+				<div class="frame__title-wrap">
+					<h1 class="frame__title">TilakT | Exploding 3D Objects</h1>
+					<div class="frame__links">
+						<a href="https://mintable.app/u/tilakart/wallet/" target="_blank">Store</a>
+						<a href="https://behance.net/Tilak/" target="_blank">Behance</a>
+						<a href="https://instagram.com/minimalist.god/" target="_blank">IG 1</a>
+					</div>
+				</div>
+				<p class="frame__credits">a Desginer <a href="https://www.instagram.com/engineerarchitect_/" target="_blank" > with 4+ years of Artistic & Technical Design Experience</a></p>
+				<div class="frame__designs">
+					<a href="index.html" class="frame__design frame__design--current">Intro</a>
+					<a href="" target="_blank"  class="frame__design">Gallery</a>
+					<a href="mailto:tilakji@engineer.com" target="_blank" class="frame__design">Mail</a>
+					<a href="tel:+91-9791387719" target="_blank" class="frame__design">Call</a>
+					<a href="" target="_blank" class="frame__design">Résumé</a><br/>
+					<a href="index-icosahedron.html" target="_blank" class="frame__design">Icosahedron</a>
+					<a href="index-heart.html" target="_blank" class="frame__design">Heart</a>
+					<a href="index-egg.html" target="_blank" class="frame__design">Egg</a>
+					<a href="index-brain.html" target="_blank" class="frame__design">Brain</a>
+				</div>
+			</div><!-- /frame -->
+		</main>
+		<script src="js/egg.js"></script>
+		<script>
+			let animation = new explosion.default(
+				'container', // id of DOM el
+				{
+					surface: 'f5ebc8',
+					inside: 'f3ae07',
+					background: '151616',
+					onLoad: () => {
+		                document.body.classList.remove('loading');
+		            }
+				}
+			);
+
+			let targetMouseX = 0, mouseX = 0, ta = 0;
+			const sign = function(n) { return n === 0 ? 1 : n/Math.abs(n); };
+			document.addEventListener('mousemove',(e) => {
+			  targetMouseX = 2*(e.clientX - animation.width/2)/animation.width;
+			});
+
+			document.addEventListener('touchmove',(e) => {
+			  targetMouseX = ( e.touches[0].clientX / animation.width ) * 2 - 1;
+			});
+
+			animation.camera.position.y = 2;
+			animation.camera.position.z = 3;
+			function draw(){
+				if(animation){
+					mouseX += (targetMouseX - mouseX)*0.05;
+					ta = Math.abs(mouseX);
+					animation.settings.progress = ta/2;
+					animation.scene.rotation.y = Math.PI/2 - ta*(2 - ta)*Math.PI * sign(mouseX);
+					animation.camera.position.z = 3 + 3*ta;
+
+				}
+				window.requestAnimationFrame(draw);
